@@ -1,6 +1,7 @@
 import './App.css'
 import SignIn from './pages/SignIn.jsx'
 import Register from './pages/Register.jsx'
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -17,10 +18,9 @@ function App() {
       <div className='min-w-screen min-h-screen'>
         <Router>
           <Routes>
-            <Route path="/" element={<SignIn />}>
-              <Route path="SignIn" element={<SignIn />} />
-              <Route path="Register" element={<Register />} />
-            </Route>
+            <Route path="/" element={<SignIn />} />
+            <Route path="/signIn" element={<SignIn />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </Router>
       </div>

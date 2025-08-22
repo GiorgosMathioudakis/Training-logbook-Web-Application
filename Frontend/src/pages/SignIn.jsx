@@ -2,6 +2,8 @@ import React from 'react'
 import SocialLogin from '../components/SocialLogin.jsx';
 import googleIcon from '../assets/google.svg';
 import appleIcon from '../assets/apple.svg';
+
+
 import {
     BrowserRouter as Router,
     Routes,
@@ -22,7 +24,7 @@ export default function SignIn() {
                     Sign In
                 </h2>
                 <h3 className='text-l'>
-                    New User? <Link to="/Register" className='underline'>Create an account</Link>
+                    New User? <Link to="/register" className='underline'>Create an account</Link>
                 </h3>
                 <form className='mt-[5%] space-y-4'>
                     <div>
