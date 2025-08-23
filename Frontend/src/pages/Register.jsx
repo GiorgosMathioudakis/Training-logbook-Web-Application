@@ -1,12 +1,5 @@
 import React, { useState } from 'react'
-import SocialLogin from '../components/SocialLogin.jsx';
-import googleIcon from '../assets/google.svg';
-import appleIcon from '../assets/apple.svg';
-
-import {
-  BrowserRouter as Router,
-  Link,
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Register() {
   // Form state
@@ -78,7 +71,6 @@ export default function Register() {
     }
   };
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -100,14 +92,10 @@ export default function Register() {
       confirmPassword: true
     });
 
-    // Check if there are any errors
     const hasErrors = Object.values(newErrors).some(error => error !== '');
 
     if (!hasErrors) {
-      // Form is valid, proceed with registration
       console.log('Form submitted successfully:', formData);
-      // Add your registration logic here
-      // Example: registerUser(formData);
     } else {
       console.log('Form has validation errors');
     }
@@ -123,7 +111,7 @@ export default function Register() {
 
   return (
     <div className='min-w-screen min-h-screen bg-pink-900 bg-linear-to-br from-[#100505] to-[#ff7a2a] flex flex-col items-center justify-center'>
-      <div className="text-white p-6 space-y-4 w-[40vw] h-[65vh]  
+      <div className="text-white p-6 w-[40vw] min-h-[65vh]
                 rounded-2xl border border-white/20 
                 bg-white/5 
                 shadow-2xl
