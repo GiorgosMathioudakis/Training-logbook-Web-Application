@@ -5,6 +5,7 @@ export default function Register() {
   // Form state
   const [formData, setFormData] = useState({
     email: '',
+    username: '',
     password: '',
     confirmPassword: ''
   });
@@ -22,6 +23,14 @@ export default function Register() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email) return 'Email is required';
     if (!emailRegex.test(email)) return 'Please enter a valid email address';
+    return '';
+  };
+
+  const validateUsername = (username) => {
+    if (!username) return 'Username is required';
+    if (username.length < 1) return 'Username must be at least 1 character long';
+    if (username.length > 30) return 'Username must be no more than 25 characters long';
+    if (username.includes(' ')) return 'Username cannot contain spaces';
     return '';
   };
 
@@ -76,11 +85,13 @@ export default function Register() {
 
     // Validate all fields
     const emailError = validateEmail(formData.email);
+    const usernameError = validateUsername(formData.username);
     const passwordError = validatePassword(formData.password);
     const confirmPasswordError = validateConfirmPassword(formData.confirmPassword, formData.password);
 
     const newErrors = {
       email: emailError,
+      username: usernameError,
       password: passwordError,
       confirmPassword: confirmPasswordError
     };
@@ -88,26 +99,23 @@ export default function Register() {
     setErrors(newErrors);
     setTouched({
       email: true,
+      username: true,
       password: true,
       confirmPassword: true
     });
 
     const hasErrors = Object.values(newErrors).some(error => error !== '');
 
-    if (!hasErrors) {
-      console.log('Form submitted successfully:', formData);
-    } else {
-      console.log('Form has validation errors');
+    if (hasErrors) {
+      console.log('Form has validation errors:', newErrors);
+      return;
     }
+
+    // If we get here, all validations passed
+    console.log('Form submitted successfully:', formData);
   };
 
-  // Check if form is valid for enabling submit button
-  const isFormValid = () => {
-    return formData.email &&
-      formData.password &&
-      formData.confirmPassword &&
-      !Object.values(errors).some(error => error !== '');
-  };
+
 
   return (
     <div className='min-w-screen min-h-screen bg-pink-900 bg-linear-to-br from-[#100505] to-[#ff7a2a] flex flex-col items-center justify-center'>
@@ -134,8 +142,23 @@ export default function Register() {
               placeholder="name@company.com"
               required
             />
-            {errors.email && (
+            {touched.email && errors.email && (
               <p className="text-red-400 text-sm mt-1">{errors.email}</p>
+            )}
+          </div>
+          <div>
+            <label className='block mb-2'>Username</label>
+            <input
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleInputChange}
+              className="border border-gray-300 w-full p-2.5 rounded-lg"
+              placeholder="Enter username (1-25 characters, no spaces)"
+              required
+            />
+            {touched.username && errors.username && (
+              <p className="text-red-400 text-sm mt-1">{errors.username}</p>
             )}
           </div>
           <div>
@@ -209,11 +232,7 @@ export default function Register() {
           </div>
           <button
             type="submit"
-            disabled={!isFormValid()}
-            className={`w-full font-bold text-l rounded-lg text-sm px-5 py-2.5 text-center mt-[5vh] ${isFormValid()
-              ? 'text-[#ff7a2a] cursor-pointer bg-white'
-              : 'text-gray-400 cursor-not-allowed bg-gray-200'
-              }`}
+            className="w-full font-bold text-l rounded-lg text-sm px-5 py-2.5 text-center mt-[5vh] text-[#ff7a2a] cursor-pointer bg-white hover:bg-gray-100 transition-colors"
           >
             Register
           </button>
