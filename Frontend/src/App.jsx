@@ -1,6 +1,8 @@
 import './App.css'
 import SignIn from './pages/SignIn.jsx'
 import Register from './pages/Register.jsx'
+import EmailVerification from './pages/EmailVerification.jsx'
+import SetUsername from './pages/SetUsername.jsx'
 
 import {
   BrowserRouter as Router,
@@ -21,6 +23,8 @@ function App() {
             <Route path="/" element={<SignIn />} />
             <Route path="/signIn" element={<SignIn />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/verify-email" element={<EmailVerification />} />
+            <Route path="/set-username" element={<SetUsername />} />
           </Routes>
         </Router>
       </div>

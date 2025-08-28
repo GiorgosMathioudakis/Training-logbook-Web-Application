@@ -5,7 +5,6 @@ export default function Register() {
   // Form state
   const [formData, setFormData] = useState({
     email: '',
-    username: '',
     password: '',
     confirmPassword: ''
   });
@@ -26,13 +25,7 @@ export default function Register() {
     return '';
   };
 
-  const validateUsername = (username) => {
-    if (!username) return 'Username is required';
-    if (username.length < 1) return 'Username must be at least 1 character long';
-    if (username.length > 30) return 'Username must be no more than 25 characters long';
-    if (username.includes(' ')) return 'Username cannot contain spaces';
-    return '';
-  };
+
 
   const validatePassword = (password) => {
     if (!password) return 'Password is required';
@@ -80,18 +73,16 @@ export default function Register() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validate all fields
     const emailError = validateEmail(formData.email);
-    const usernameError = validateUsername(formData.username);
     const passwordError = validatePassword(formData.password);
     const confirmPasswordError = validateConfirmPassword(formData.confirmPassword, formData.password);
 
     const newErrors = {
       email: emailError,
-      username: usernameError,
       password: passwordError,
       confirmPassword: confirmPasswordError
     };
@@ -99,7 +90,6 @@ export default function Register() {
     setErrors(newErrors);
     setTouched({
       email: true,
-      username: true,
       password: true,
       confirmPassword: true
     });
@@ -111,8 +101,34 @@ export default function Register() {
       return;
     }
 
-    // If we get here, all validations passed
-    console.log('Form submitted successfully:', formData);
+    // If we get here, all validations passed - send to backend
+    try {
+      const response = await fetch('http://localhost:8080/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password
+        }),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Registration successful:', result);
+        // Show success message to user
+        alert('Registration successful! Please check your email for verification link.');
+      } else {
+        const error = await response.json();
+        console.error('Registration failed:', error);
+        // Show error message to user
+        alert('Registration failed: ' + (error.message || 'Unknown error'));
+      }
+    } catch (error) {
+      console.error('Network error:', error);
+      alert('Network error. Please try again.');
+    }
   };
 
 
@@ -146,21 +162,7 @@ export default function Register() {
               <p className="text-red-400 text-sm mt-1">{errors.email}</p>
             )}
           </div>
-          <div>
-            <label className='block mb-2'>Username</label>
-            <input
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleInputChange}
-              className="border border-gray-300 w-full p-2.5 rounded-lg"
-              placeholder="Enter username (1-25 characters, no spaces)"
-              required
-            />
-            {touched.username && errors.username && (
-              <p className="text-red-400 text-sm mt-1">{errors.username}</p>
-            )}
-          </div>
+
           <div>
             <label className='block mb-2'>Password</label>
             <div className="relative">

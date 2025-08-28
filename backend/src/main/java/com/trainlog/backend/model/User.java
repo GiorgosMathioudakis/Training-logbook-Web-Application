@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
@@ -18,7 +19,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String username;
 
     @Column(nullable = false, unique = true)
@@ -29,5 +30,17 @@ public class User {
 
     @Column(nullable = false)
     private AppUserRole appUserRole;
+
+    @Column(nullable = false)
+    private boolean enabled = false;
+
+    @Column(nullable = true)
+    private String emailVerificationToken;
+
+    @Column(nullable = true)
+    private LocalDateTime emailVerificationTokenExpiry;
+
+    @Column(nullable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
 
 }
