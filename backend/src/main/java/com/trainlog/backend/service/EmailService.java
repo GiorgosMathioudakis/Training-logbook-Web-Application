@@ -16,7 +16,7 @@ public class EmailService {
         message.setTo(to);
         message.setSubject("Training Logbook - Email Verification");
         message.setText("Please click the following link to verify your email:\n\n" +
-                "http://localhost:3000/verify-email?token=" + token + "\n\n" +
+                "http://localhost:5173/verify-email?token=" + token + "\n\n" +
                 "This link will expire in 24 hours.\n\n" +
                 "If you did not create an account, please ignore this email.");
 

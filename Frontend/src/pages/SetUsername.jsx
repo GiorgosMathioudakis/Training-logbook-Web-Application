@@ -105,7 +105,7 @@ export default function SetUsername() {
                             type="text"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
-                            className="border border-gray-300 w-full p-2.5 rounded-lg text-black"
+                            className="border border-gray-300 w-full p-2.5 rounded-lg"
                             placeholder="Enter username (1-25 characters, no spaces)"
                             required
                             disabled={isSubmitting}
@@ -115,16 +115,12 @@ export default function SetUsername() {
                         )}
                     </div>
 
-                    <div className="bg-gray-800 p-3 rounded-lg text-sm">
-                        <p className="text-gray-300">Email: <span className="text-white">{email}</span></p>
-                    </div>
-
                     <button
                         type="submit"
                         disabled={isSubmitting}
                         className={`w-full font-bold text-l rounded-lg text-sm px-5 py-2.5 text-center mt-[5vh] ${isSubmitting
-                                ? 'text-gray-400 cursor-not-allowed bg-gray-200'
-                                : 'text-[#ff7a2a] cursor-pointer bg-white hover:bg-gray-100 transition-colors'
+                            ? 'text-gray-400 cursor-not-allowed bg-gray-200'
+                            : 'text-[#ff7a2a] cursor-pointer bg-white hover:bg-gray-100 transition-colors'
                             }`}
                     >
                         {isSubmitting ? 'Setting Username...' : 'Complete Registration'}
