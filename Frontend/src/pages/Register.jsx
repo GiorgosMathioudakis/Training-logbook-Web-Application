@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Register() {
   // Form state
@@ -13,9 +13,10 @@ export default function Register() {
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
 
-  // Password visibility state
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const navigate = useNavigate();
 
   // Validation functions
   const validateEmail = (email) => {
@@ -117,8 +118,9 @@ export default function Register() {
       if (response.ok) {
         const result = await response.json();
         console.log('Registration successful:', result);
-        // Show success message to user
-        alert('Registration successful! Please check your email for verification link.');
+        // Redirect to SetUsername page, passing email
+        navigate('/set-username', { state: { email: formData.email } });
+        return;
       } else {
         const error = await response.json();
         console.error('Registration failed:', error);

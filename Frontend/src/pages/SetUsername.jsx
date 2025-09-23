@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function SetUsername() {
@@ -7,9 +7,19 @@ export default function SetUsername() {
     const [username, setUsername] = useState('');
     const [error, setError] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     // Get email from location state or URL params
     const email = location.state?.email || new URLSearchParams(location.search).get('email');
+
+    useEffect(() => {
+        // Add a small delay to prevent flash
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 100);
+
+        return () => clearTimeout(timer);
+    }, []);
 
     const validateUsername = (username) => {
         if (!username) return 'Username is required';
@@ -62,6 +72,23 @@ export default function SetUsername() {
             setIsSubmitting(false);
         }
     };
+
+    // Show loading state to prevent flash
+    if (isLoading) {
+        return (
+            <div className='min-w-screen min-h-screen bg-pink-900 bg-linear-to-br from-[#100505] to-[#ff7a2a] flex flex-col items-center justify-center'>
+                <div className="text-white p-6 w-[40vw] min-h-[40vh]
+                  rounded-2xl border border-white/20 
+                  bg-white/5 
+                  shadow-2xl
+                  space-y-4 text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
+                    <h2 className='text-2xl'>Loading...</h2>
+                    <p>Please wait...</p>
+                </div>
+            </div>
+        );
+    }
 
     if (!email) {
         return (

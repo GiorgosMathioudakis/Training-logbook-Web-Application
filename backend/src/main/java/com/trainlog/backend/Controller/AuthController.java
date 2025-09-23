@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:5173")
 public class AuthController {
 
     @Autowired
@@ -31,18 +31,6 @@ public class AuthController {
         }
     }
 
-    @GetMapping("/verify-email")
-    public ResponseEntity<ApiResponse> verifyEmail(@RequestParam("token") String token) {
-        try {
-            User user = authService.verifyEmail(token);
-            return ResponseEntity.ok(ApiResponse.success(
-                    "Email verified successfully. Please set your username to complete registration.",
-                    user.getEmail()));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest()
-                    .body(ApiResponse.error(e.getMessage()));
-        }
-    }
 
     @PostMapping("/set-username")
     public ResponseEntity<ApiResponse> setUsername(@Valid @RequestBody UsernameRequest request) {
