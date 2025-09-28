@@ -10,12 +10,41 @@ import {
     Link,
     useLocation,
 } from 'react-router-dom';
-
+import PasswordField from '../components/PasswordField.jsx';
 
 
 export default function SignIn() {
 
     const [showPassword, setShowPassword] = useState(false);
+    const [password, setPassword] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [email, setEmail] = useState('');
+    const [emailError, setEmailError] = useState('');
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+        setPasswordError('');
+    };
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+        setEmailError('');
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Minimal validation: just check required
+        let hasError = false;
+        if (!email) {
+            setEmailError('Email is required');
+            hasError = true;
+        }
+        if (!password) {
+            setPasswordError('Password is required');
+            hasError = true;
+        }
+        if (hasError) return;
+        // TODO: Add sign-in logic here
+    };
 
     return (
         <div className='min-w-screen min-h-screen bg-pink-900 bg-linear-to-br from-[#100505] to-[#ff7a2a] flex flex-col items-center justify-center'>
@@ -30,15 +59,19 @@ export default function SignIn() {
                 <h3 className='text-l'>
                     New User? <Link to="/register" className='underline'>Create an account</Link>
                 </h3>
-                <form className='mt-4 space-y-4 flex flex-col'>
+                <form className='mt-4 space-y-4 flex flex-col' onSubmit={handleSubmit}>
                     <div>
                         <label className='block mb-2'>Email</label>
-                        <input className='border w-full p-2.5 rounded-lg' placeholder="name@company.com" required></input>
+                        <input className='border w-full p-2.5 rounded-lg' placeholder="name@company.com" required value={email} onChange={handleEmailChange}></input>
+                        {emailError && <p className="text-red-400 text-sm mt-1">{emailError}</p>}
                     </div>
-                    <div>
-                        <label className='block mb-2'>Password</label>
-                        <input className='border w-full p-2.5 rounded-lg' placeholder="••••••••" required></input>
-                    </div>
+                    <PasswordField
+                        value={password}
+                        onChange={handlePasswordChange}
+                        error={passwordError}
+                        showPassword={showPassword}
+                        setShowPassword={setShowPassword}
+                    />
                     <div className="flex items-center justify-between">
                         <div className="flex items-start">
                             <div className="flex items-center h-5">
