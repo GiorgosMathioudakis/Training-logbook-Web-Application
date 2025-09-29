@@ -18,6 +18,11 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+    @GetMapping("/SignIn")
+    public String signIn() {
+        return "SignIn endpoint is under construction.";
+    }
+
     @PostMapping("/register")
     public ResponseEntity<ApiResponse> register(@Valid @RequestBody RegisterRequest request) {
         try {
