@@ -1,7 +1,8 @@
 import SocialLogin from '../components/SocialLogin.jsx';
 import googleIcon from '../assets/google.svg';
 import appleIcon from '../assets/apple.svg';
-import React, { useState } from 'react'
+import React, { use, useState } from 'react'
+
 
 import {
     BrowserRouter as Router,
@@ -9,30 +10,35 @@ import {
     Route,
     Link,
     useLocation,
+    useNavigate
 } from 'react-router-dom';
 import PasswordField from '../components/PasswordField.jsx';
 
 
 export default function SignIn() {
 
+    const navigate = useNavigate();
+
     const [showPassword, setShowPassword] = useState(false);
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState('');
+    const [serverError, setServerError] = useState('');
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
         setPasswordError('');
     };
+
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
         setEmailError('');
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Minimal validation: just check required
+
         let hasError = false;
         if (!email) {
             setEmailError('Email is required');
@@ -43,7 +49,28 @@ export default function SignIn() {
             hasError = true;
         }
         if (hasError) return;
-        // TODO: Add sign-in logic here
+
+        try {
+            const response = await fetch('http://localhost:8080/api/auth/signin', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Invalid credentials');
+            }
+
+            console.log('User authenticated:', data.data);
+
+            // redirect to SetUsername page and maybe pass user data
+            navigate('/set-username', { state: { email: email } });
+
+        } catch (error) {
+            setServerError(error.message);
+        }
     };
 
     return (

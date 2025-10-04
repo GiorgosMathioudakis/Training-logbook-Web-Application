@@ -19,6 +19,18 @@ public class AuthService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    public User authenticateUser(String email, String password) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (!passwordEncoder.matches(password, user.getPasswordHash())) {
+            throw new RuntimeException("Invalid password");
+        }
+
+        return user;
+    }
+
+
     public User registerUser(String email, String password) {
         if (userRepository.existsByEmail(email)) {
             throw new RuntimeException("Email already registered");
@@ -28,7 +40,7 @@ public class AuthService {
         user.setEmail(email);
         user.setPasswordHash(passwordEncoder.encode(password));
         user.setAppUserRole(AppUserRole.USER);
-        user.setEnabled(true); // Enable user immediately
+        user.setEnabled(true);
         user.setCreatedAt(LocalDateTime.now());
 
         return userRepository.save(user);
