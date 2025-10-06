@@ -61,8 +61,7 @@ export default function SetUsername() {
             const result = await response.json();
 
             if (response.ok) {
-                alert('Registration completed successfully! You can now sign in.');
-                navigate('/signIn');
+                navigate('/Home');
             } else {
                 setError(result.message || 'Failed to set username');
             }
