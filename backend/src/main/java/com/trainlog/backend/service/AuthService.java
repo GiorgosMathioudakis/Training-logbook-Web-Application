@@ -39,7 +39,7 @@ public class AuthService {
         User user = new User();
         user.setEmail(email);
         user.setPasswordHash(passwordEncoder.encode(password));
-        user.setAppUserRole(AppUserRole.USER);
+        user.setAppUserRole(AppUserRole.USER); 
         user.setEnabled(true);
         user.setCreatedAt(LocalDateTime.now());
 

@@ -57,22 +57,19 @@ export default function SignIn() {
                 body: JSON.stringify({ email, password }),
             });
 
-            console.log(email, password, username);
             const data = await response.json();
 
             if (!response.ok) {
                 throw new Error(data.message || 'Invalid credentials');
             }
 
-            // const user = data.data;
+            const user = data.data;
 
-            navigate("/home");
-
-            // if (user.username === null || user.username === "") {
-            //     navigate("/set-username", { state: { email: user.email } });
-            // } else {
-            //     navigate("/home", { state: { user } });
-            // }
+            if (user.username === null || user.username === "") {
+                navigate("/set-username", { state: { email: user.email } });
+            } else {
+                navigate("/home", { state: { user } });
+            }
 
         } catch (error) {
             setServerError(error.message);
