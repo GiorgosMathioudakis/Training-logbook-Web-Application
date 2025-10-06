@@ -21,10 +21,10 @@ public class AuthService {
 
     public User authenticateUser(String email, String password) {
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("Invalid email or password"));
 
         if (!passwordEncoder.matches(password, user.getPasswordHash())) {
-            throw new RuntimeException("Invalid password");
+            throw new RuntimeException("Invalid email or password");
         }
 
         return user;
@@ -39,7 +39,7 @@ public class AuthService {
         User user = new User();
         user.setEmail(email);
         user.setPasswordHash(passwordEncoder.encode(password));
-        user.setAppUserRole(AppUserRole.USER); 
+        user.setAppUserRole(AppUserRole.USER);
         user.setEnabled(true);
         user.setCreatedAt(LocalDateTime.now());
 

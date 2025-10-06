@@ -25,6 +25,7 @@ export default function SignIn() {
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState('');
     const [serverError, setServerError] = useState('');
+    const [loginError, setLoginError] = useState('');
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
@@ -72,6 +73,7 @@ export default function SignIn() {
             }
 
         } catch (error) {
+            setLoginError('Sorry, invalid email or password');
             setServerError(error.message);
         }
     };
@@ -114,6 +116,9 @@ export default function SignIn() {
                         <a href="#" className="text-sm font-medium hover:underline">Forgot password?</a>
                     </div>
                     <button type="submit" className="w-full text-[#ff7a2a] cursor-pointer bg-white font-bold text-l rounded-lg text-sm px-5 py-2.5 text-center">Sign in</button>
+                    {loginError && (
+                        <p className="text-red-400 text-center text-m mt-2">{loginError}</p>
+                    )}
                     <p className='separator'> <span>Or continue with</span> </p>
                     <div className='flex flex-col gap-1 text-[#ff7a2a]'>
                         <SocialLogin text={"Google"} image={googleIcon} alt="Google" />
