@@ -1,26 +1,22 @@
 package com.trainlog.backend.model;
 
+
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
+@Entity
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
-public class Exercise {
+public class WorkoutExercise {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long workoutExerciseId;
+
+    @Column(nullable = false)
     private Long exerciseId;
 
     @Column(nullable = false)
-    private String name;
-
-    private String description;
-
+    private Long workoutId;
 }

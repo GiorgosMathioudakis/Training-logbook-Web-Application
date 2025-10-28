@@ -1,26 +1,32 @@
 package com.trainlog.backend.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.domain.OffsetScrollPosition;
+
+import java.time.OffsetDateTime;
 
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-public class Exercise {
+public class Workout {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long exerciseId;
+    private Long workoutId;
+
+    @Column(nullable = false)
+    private Long userId;
 
     @Column(nullable = false)
     private String name;
 
     private String description;
+
+    @Column(nullable = false)
+    private OffsetDateTime workoutDate;
 
 }
