@@ -40,7 +40,7 @@ public class AuthController {
             User user = authService.registerUser(request.getEmail(), request.getPassword());
             return ResponseEntity.ok(ApiResponse.success(
                     "Registration successful. Please check your email for verification link.",
-                    user.getId()));
+                    user.getUserId()));
         } catch (Exception e) {
             return ResponseEntity.badRequest()
                     .body(ApiResponse.error(e.getMessage()));
