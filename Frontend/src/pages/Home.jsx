@@ -26,9 +26,6 @@ export default function Home() {
         // e.g., fetch(`/api/workouts/user/${user.userId}/recent?limit=3`)
         // For now, we use mock data
         setRecentWorkouts([
-            { id: 1, name: 'Push Day', date: 'Yesterday' },
-            { id: 2, name: 'Leg Day', date: '3 days ago' },
-            { id: 3, name: 'Pull Day', date: '5 days ago' },
         ]);
     }, [user, navigate]);
 
