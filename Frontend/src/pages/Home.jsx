@@ -5,13 +5,9 @@ import Sidebar from '../components/Sidebar.jsx'; // Import the sidebar
 export default function Home() {
     const location = useLocation();
     const navigate = useNavigate();
-    
-    // Get user from navigation state (passed from SignIn.jsx)
-    // NOTE: This state is lost on page refresh. You'll want to use
-    // React Context or local storage for real auth state management.
+
     const user = location.state?.user;
 
-    // Mock data for recent workouts. You will fetch this from your Spring Boot API.
     const [recentWorkouts, setRecentWorkouts] = useState([]);
 
     useEffect(() => {
@@ -31,7 +27,7 @@ export default function Home() {
 
 
     return (
-        <div className="min-h-screen flex bg-gray-900 text-white">
+        <div className="min-h-screen flex brand-gradient text-white">
             <Sidebar />
             
             {/* Main content area */}
@@ -49,21 +45,21 @@ export default function Home() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
                     {/* Card 1: Start New Workout (Primary CTA) */}
-                    <div className="md:col-span-2 bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col justify-center items-center text-center">
+                    <div className="md:col-span-2 glass-float-effect p-6 flex flex-col justify-center items-center text-center">
                         <h2 className="text-2xl font-semibold mb-4">Start a New Workout</h2>
                         <p className="text-gray-400 mb-6">
                             Begin a new session or choose from one of your saved templates.
                         </p>
                         <button 
                             onClick={() => navigate('/workout/new')} // You'll create this route
-                            className="bg-orange-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-orange-600 transition-colors"
+                            className=" text-white font-bold py-3 px-8 rounded-lg hover:bg-orange-600 transition-colors"
                         >
                             Start Now
                         </button>
                     </div>
 
                     {/* Card 2: Recent Workouts */}
-                    <div className="bg-gray-800 rounded-xl shadow-lg p-6">
+                    <div className="glass-float-effect p-6">
                         <h2 className="text-2xl font-semibold mb-5">Recent Workouts</h2>
                         <div className="space-y-4">
                             {recentWorkouts.length > 0 ? (

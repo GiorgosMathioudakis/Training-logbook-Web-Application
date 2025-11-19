@@ -16,7 +16,7 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="w-64 h-screen bg-gray-900 text-white flex flex-col fixed">
+    <div className="w-64 h-screen glass-float-effect-right text-white flex flex-col fixed">
       <div className="p-5 border-b border-gray-700">
         <h1 className="text-2xl font-bold text-orange-500">TrainLog</h1>
       </div>

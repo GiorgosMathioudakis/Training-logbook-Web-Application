@@ -136,7 +136,7 @@ export default function Register() {
 
 
   return (
-    <div className='min-w-screen min-h-screen bg-pink-900 bg-linear-to-br from-[#100505] to-[#ff7a2a] flex flex-col items-center justify-center'>
+    <div className='min-w-screen min-h-screen brand-gradient flex flex-col items-center justify-center'>
       <div className="text-white p-6 w-[40vw] min-h-[65vh]
                 rounded-2xl border border-white/20 
                 bg-white/5 

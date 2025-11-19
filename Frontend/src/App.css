@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+.brand-gradient {
+   @apply bg-pink-900 bg-linear-to-br from-[#100505] to-[#ff7a2a]
+}
+
+.glass-float-effect {
+    @apply rounded-2xl border border-white/20
+    bg-white/5
+}
+
+.glass-float-effect-right {
+    @apply rounded-r-2xl border border-white/20
+    bg-white/5
+}
+
 .social-button {
     display: flex;
     gap: 0.81rem;
