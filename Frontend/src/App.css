@@ -46,3 +46,53 @@
     text-align: center;
     background: opacue;
 }
+
+.exercises-page {
+    display: flex;
+    background-color: #1a1a1a;
+    color: white;
+    min-height: 100vh;
+}
+
+.exercises-content {
+    flex-grow: 1;
+    padding: 2rem;
+    margin-left: 16rem; / Same as sidebar width /
+}
+
+.exercises-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.exercises-header h1 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.add-exercise-btn {
+    background-color: #f97316; / Orange-500 /
+color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.add-exercise-btn:hover {
+    background-color: #ea580c; / Orange-600 /
+}
+.exercise-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.exercise-item {
+    background-color: #2d2d2d;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}

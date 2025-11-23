@@ -1,15 +1,11 @@
 import SocialLogin from '../components/SocialLogin.jsx';
 import googleIcon from '../assets/google.svg';
 import appleIcon from '../assets/apple.svg';
-import React, { use, useState } from 'react'
+import React, { useState } from 'react'
 
 
 import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
     Link,
-    useLocation,
     useNavigate
 } from 'react-router-dom';
 import PasswordField from '../components/PasswordField.jsx';
@@ -79,7 +75,7 @@ export default function SignIn() {
     };
 
     return (
-        <div className='min-w-screen min-h-screen bg-pink-900 bg-linear-to-br from-[#100505] to-[#ff7a2a] flex flex-col items-center justify-center'>
+        <div className='min-w-screen min-h-screen brand-gradient flex flex-col items-center justify-center'>
             <div className="text-white p-6 space-y-4 w-full max-w-md min-h-[450px] 
                 rounded-2xl border border-white/20 
                 bg-white/5 
