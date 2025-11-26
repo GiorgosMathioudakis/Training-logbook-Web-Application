@@ -57,7 +57,7 @@
 .exercises-content {
     flex-grow: 1;
     padding: 2rem;
-    margin-left: 16rem; / Same as sidebar width /
+    margin-left: 16rem;
 }
 
 .exercises-header {
@@ -73,8 +73,8 @@
 }
 
 .add-exercise-btn {
-    background-color: #f97316; / Orange-500 /
-color: white;
+    background-color: #f97316;
+    color: white;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     font-weight: bold;
@@ -83,8 +83,9 @@ color: white;
 }
 
 .add-exercise-btn:hover {
-    background-color: #ea580c; / Orange-600 /
+    background-color: #ea580c;
 }
+
 .exercise-list {
     display: flex;
     flex-direction: column;
