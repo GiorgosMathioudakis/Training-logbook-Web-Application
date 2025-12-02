@@ -12,7 +12,7 @@ export default function Exercises() {
     useEffect(() => {
         const fetchExercises = async () => {
             try {
-                const response = await fetch('http://localhost:8080/exercise');
+                const response = await fetch('/exercises/get-all');
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);

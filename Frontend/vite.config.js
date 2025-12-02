@@ -8,5 +8,13 @@ export default defineConfig({
     tailwindcss(),
     react()
   ],
-  
+  server: {
+    port: 5173,
+    proxy: {
+      '/exercises': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+      },
+    },
+  },
 })

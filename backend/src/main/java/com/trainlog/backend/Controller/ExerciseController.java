@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/exercise")
+@RequestMapping("/exercises")
 @CrossOrigin(origins = "http://localhost:5173")
 public class ExerciseController {
 
     @Autowired
     ExerciseService exerciseService;
 
-    @GetMapping
+    @GetMapping("/get-all")
     public List<Exercise> getAllExercises() {
         return exerciseService.getAllExercises();
     }
